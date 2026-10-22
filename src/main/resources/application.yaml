@@ -1,3 +1,14 @@
 spring:
   application:
-    name: demo
+    name: fund-service
+
+  datasource:
+    url: default
+    username: default
+    password: default
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
