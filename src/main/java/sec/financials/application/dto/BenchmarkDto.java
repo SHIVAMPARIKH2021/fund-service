@@ -1,4 +1,4 @@
 package sec.financials.application.dto;
 
-public class FundResponseDto {
+public class BenchmarkDto {
 }

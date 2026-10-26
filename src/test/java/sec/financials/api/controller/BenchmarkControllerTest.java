@@ -1,4 +1,4 @@
-package sec.financials.api;
+package sec.financials.api.controller;
 
 public class BenchmarkControllerTest {
 }
