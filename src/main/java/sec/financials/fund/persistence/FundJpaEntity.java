@@ -1,23 +1,19 @@
 package sec.financials.fund.persistence;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import sec.financials.fund.domain.Fund;
 
 import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Schema(name = "analytics")
-@Table(name = "fund_master")
+@Table(name = "fund_master", schema = "analytics")
 public class FundJpaEntity {
 
+    @Id
     @Column(name = "fund_id", nullable = false)
     private Integer fundId;
 

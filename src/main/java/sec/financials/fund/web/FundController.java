@@ -17,7 +17,7 @@ public class FundController {
     }
 
     @GetMapping("/v1/fund/{fundId}")
-    public ResponseEntity<@NonNull FundResponseDto> fetchFundInformation(@PathVariable("id") Integer fundId) {
+    public ResponseEntity<@NonNull FundResponseDto> fetchFundInformation(@PathVariable("fundId") Integer fundId) {
         var response = fundService.fetchFundById(fundId);
         return ResponseEntity.ok(
             new FundResponseDto(
@@ -25,6 +25,8 @@ public class FundController {
                         response.getFundName(),
                         response.getFundFamily(),
                         response.getFundType(),
+                        response.getPrimaryBenchmarkName(),
+                        response.getPrimaryBenchmarkId(),
                         response.getStrategyNarrative(),
                         response.getInvestmentObjective(),
                         response.getCik(),
