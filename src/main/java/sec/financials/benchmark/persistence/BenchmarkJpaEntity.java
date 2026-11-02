@@ -1,8 +1,8 @@
 package sec.financials.benchmark.persistence;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -10,10 +10,10 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Schema(name = "analytics")
-@Table(name = "benchmark_master")
+@Table(name = "benchmark_master", schema = "analytics")
 public class BenchmarkJpaEntity {
 
+    @Id
     @Column(name = "benchmark_id", nullable = false)
     private Integer benchmarkId;
 

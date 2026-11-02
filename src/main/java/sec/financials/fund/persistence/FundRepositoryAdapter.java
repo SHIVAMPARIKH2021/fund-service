@@ -9,15 +9,15 @@ import java.util.Optional;
 @Repository
 public class FundRepositoryAdapter implements FundRepository {
 
-    private final JpaFundRepository jpaFundRepository;
+    private final FundJpaRepository fundJpaRepository;
 
-    public FundRepositoryAdapter(JpaFundRepository jpaFundRepository) {
-        this.jpaFundRepository = jpaFundRepository;
+    public FundRepositoryAdapter(FundJpaRepository fundJpaRepository) {
+        this.fundJpaRepository = fundJpaRepository;
     }
 
     @Override
     public Optional<Fund> findById(Integer id) {
-        return jpaFundRepository.findById(Long.valueOf(id))
+        return fundJpaRepository.findById(Long.valueOf(id))
                 .map(FundPersistenceMapper::toDomain);
     }
 }
