@@ -1,14 +1,33 @@
 package sec.financials.fund.web;
 
+import ch.qos.logback.core.util.StringUtil;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+import sec.financials.fund.domain.Fund;
+import sec.financials.fund.exception.InvalidFundException;
 import sec.financials.fund.service.FundService;
 
+
+@Slf4j
 @RestController
+@RequestMapping("/v1")
+@Validated
 public class FundController {
+
+    @Value("${fund.series.format}")
+    private String seriesFormat;
 
     private final FundService fundService;
 
@@ -16,25 +35,29 @@ public class FundController {
         this.fundService = fundService;
     }
 
-    @GetMapping("/v1/fund/{fundId}")
-    public ResponseEntity<@NonNull FundResponseDto> fetchFundInformation(@PathVariable("fundId") Integer fundId) {
-        var response = fundService.fetchFundById(fundId);
-        return ResponseEntity.ok(
-            new FundResponseDto(
-                        response.getFundId(),
-                        response.getFundName(),
-                        response.getFundFamily(),
-                        response.getFundType(),
-                        response.getPrimaryBenchmarkName(),
-                        response.getPrimaryBenchmarkId(),
-                        response.getStrategyNarrative(),
-                        response.getInvestmentObjective(),
-                        response.getCik(),
-                        response.getSeriesId(),
-                        response.getFilingNumber(),
-                        response.getHasDailyPricing(),
-                        response.getHasQuarterlyHoldings()
-            )
-        );
+    @GetMapping("/fund/{series}/overview")
+    public ResponseEntity<@NonNull FundResponseDto> fetchFundInformationBySeries(
+            @PathVariable("series")
+            String seriesId
+    ) {
+        if(StringUtil.isNullOrEmpty(seriesId) || !seriesId.matches(seriesFormat)) {
+            throw new InvalidFundException("Invalid Series Id: " + seriesId);
+        }
+        var response = fundService.fetchFundBySeries(seriesId);
+        log.info("Successfully fetched fund with series id {}", seriesId);
+        return ResponseEntity.ok(FundWebMapper.toFundResponseDto(response));
+    }
+
+    @GetMapping("/funds")
+    public ResponseEntity<@NonNull PageResponseDto<Fund>> getAllFunds(
+            @PageableDefault(
+                    size = 20,
+                    sort = "fundId",
+                    direction = Sort.Direction.ASC
+            ) Pageable pageable
+    ) {
+        PageResponseDto<Fund> pagedFunds = FundWebMapper.toPageResponseDto(fundService.findAll(pageable));
+        log.info("Successfully fetched funds...");
+        return ResponseEntity.ok(pagedFunds);
     }
 }

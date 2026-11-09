@@ -22,13 +22,14 @@ public class Fund {
     private String cik;
     private String primaryBenchmarkName;
     private Integer primaryBenchmarkId;
-    private String primaryTicker;
+    private String ticker;
     private String filingNumber;//adsh
-    private Boolean hasDailyPricing;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private String createdBy;
     private String updatedBy;
+    private String reportingCadence;
+    private Boolean hasDailyPricing;
     private Boolean hasQuarterlyHoldings;
     private Integer effectiveFromQuarter;
     private Integer effectiveFromYear;

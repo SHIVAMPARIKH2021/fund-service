@@ -1,6 +1,7 @@
 package sec.financials.fund.persistence;
 
 import sec.financials.fund.domain.Fund;
+import sec.financials.fund.persistence.entity.FundJpaEntity;
 
 public class FundPersistenceMapper {
 
@@ -12,6 +13,7 @@ public class FundPersistenceMapper {
         fund.setFundId(fundEntity.getFundId());
         fund.setFundName(fundEntity.getFundName());
         fund.setFundFamily(fundEntity.getFundFamily());
+        fund.setTicker(fundEntity.getPrimaryTicker());
         fund.setFundType(fundEntity.getStrategyType());
         fund.setInvestmentObjective(fundEntity.getInvestmentObjective());
         fund.setStrategyNarrative(fundEntity.getStrategyNarrative());
@@ -20,6 +22,7 @@ public class FundPersistenceMapper {
         fund.setFilingNumber(fundEntity.getAccessionNumber());
         fund.setPrimaryBenchmarkId(fundEntity.getBenchmarkId());
         fund.setPrimaryBenchmarkName(fundEntity.getBenchmarkName());
+        fund.setReportingCadence(fundEntity.getReportingCadence());
         fund.setHasDailyPricing(fundEntity.getHasDailyPricing());
         fund.setHasQuarterlyHoldings(fundEntity.getHasQuarterlyHoldings());
         fund.setCreatedAt(fundEntity.getCreatedAt());
