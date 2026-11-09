@@ -1,4 +1,4 @@
-package sec.financials.fund.persistence;
+package sec.financials.fund.persistence.entity;
 
 public class FundBenchmarkAssociationJpaEntity {
 }

@@ -1,11 +1,18 @@
 package sec.financials.fund.persistence;
 
+import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import sec.financials.fund.domain.Fund;
 import sec.financials.fund.domain.FundRepository;
+import sec.financials.fund.persistence.entity.FundJpaEntity;
 
+import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Repository
 public class FundRepositoryAdapter implements FundRepository {
 
@@ -16,8 +23,15 @@ public class FundRepositoryAdapter implements FundRepository {
     }
 
     @Override
-    public Optional<Fund> findById(Integer id) {
-        return fundJpaRepository.findById(Long.valueOf(id))
+    public Optional<Fund> findBySeriesId(String seriesId) {
+        log.info("Fetching data from database for series id {}", seriesId);
+        return fundJpaRepository.findBySeriesId(seriesId)
                 .map(FundPersistenceMapper::toDomain);
+    }
+
+    @Override
+    public Page<@NonNull Fund> findAll(Pageable pageable){
+        log.info("Fetching the funds from data base.");
+        return fundJpaRepository.findAll(pageable).map(FundPersistenceMapper::toDomain);
     }
 }

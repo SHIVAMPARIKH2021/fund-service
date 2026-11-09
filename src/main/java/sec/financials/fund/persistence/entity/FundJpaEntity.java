@@ -1,4 +1,4 @@
-package sec.financials.fund.persistence;
+package sec.financials.fund.persistence.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,6 +19,9 @@ public class FundJpaEntity {
 
     @Column(name = "fund_name", nullable = false)
     private String fundName;
+
+    @Column(name = "primary_ticker", nullable = false)
+    private String primaryTicker;
 
     @Column(name = "fund_family", nullable = false)
     private String fundFamily;
@@ -58,6 +61,9 @@ public class FundJpaEntity {
 
     @Column(name = "accession_number", nullable = false)
     private String accessionNumber;
+
+    @Column(name = "reporting_cadence")
+    private String reportingCadence;
 
     @Column(name = "has_daily_pricing", nullable = false)
     private Boolean hasDailyPricing;

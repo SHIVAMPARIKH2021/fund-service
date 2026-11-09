@@ -4,6 +4,7 @@ public record FundResponseDto(
         Integer fundId,
         String fundName,
         String fundFamily,
+        String ticker,
         String fundType,
         String benchmark,
         Integer benchmarkId,
