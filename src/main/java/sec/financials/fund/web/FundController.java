@@ -24,7 +24,7 @@ import sec.financials.fund.service.FundService;
 @RestController
 @RequestMapping("/v1")
 @Validated
-public class FundController {
+class FundController {
 
     @Value("${fund.series.format}")
     private String seriesFormat;
@@ -36,7 +36,7 @@ public class FundController {
     }
 
     @GetMapping("/fund/{series}/overview")
-    public ResponseEntity<@NonNull FundResponseDto> fetchFundInformationBySeries(
+    ResponseEntity<@NonNull FundResponseDto> fetchFundInformationBySeries(
             @PathVariable("series")
             String seriesId
     ) {
@@ -49,7 +49,7 @@ public class FundController {
     }
 
     @GetMapping("/funds")
-    public ResponseEntity<@NonNull PageResponseDto<Fund>> getAllFunds(
+    ResponseEntity<@NonNull PageResponseDto<Fund>> getAllFunds(
             @PageableDefault(
                     size = 20,
                     sort = "fundId",

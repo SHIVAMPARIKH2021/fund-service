@@ -4,9 +4,9 @@ import lombok.NonNull;
 import org.springframework.data.domain.Page;
 import sec.financials.fund.domain.Fund;
 
-public class FundWebMapper {
+class FundWebMapper {
 
-    public static FundResponseDto toFundResponseDto(Fund fund) {
+    static FundResponseDto toFundResponseDto(Fund fund) {
        return new FundResponseDto(
                fund.getFundId(),
                fund.getFundName(),
@@ -25,7 +25,7 @@ public class FundWebMapper {
        );
     }
 
-    public static <T> PageResponseDto<T> toPageResponseDto(Page<@NonNull T> result) {
+    static <T> PageResponseDto<T> toPageResponseDto(Page<@NonNull T> result) {
         return new PageResponseDto<>(
                 result.getContent(),
                 result.getNumber(),
