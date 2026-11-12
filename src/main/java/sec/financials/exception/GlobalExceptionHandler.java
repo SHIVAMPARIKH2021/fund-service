@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.HandlerMethodValidationException;
 import sec.financials.fund.exception.InvalidFundException;
 import sec.financials.fund.exception.NoFundFoundException;
+import sec.financials.fund.exception.RegulatoryInvariantViolationException;
 
 import java.security.InvalidParameterException;
 import java.time.Instant;
@@ -49,6 +50,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(InvalidParameterException.class)
     public ResponseEntity<@NonNull ErrorResponse> handleInvalidParameterException(InvalidParameterException ex) {
         return buildErrorResponse(HttpStatus.BAD_REQUEST, VALIDATION_ERROR, ex.getMessage());
+    }
+
+    @ExceptionHandler(RegulatoryInvariantViolationException.class)
+    public ResponseEntity<@NonNull ErrorResponse> handleRegulatoryInvariantViolationException(RegulatoryInvariantViolationException ex) {
+        return buildErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, INTERNAL_SERVER_ERROR, ex.getMessage());
     }
 
     private ResponseEntity<@NonNull ErrorResponse> buildErrorResponse(

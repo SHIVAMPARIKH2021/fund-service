@@ -4,8 +4,8 @@ spring:
 
   datasource:
     url: jdbc:postgresql://localhost:5432/funds
-    username: postgres
-    password: postgres
+    username: funds_app
+    password: strong/?12x3402
 
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect

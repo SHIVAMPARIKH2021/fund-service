@@ -1,3 +1,7 @@
+/**
+ * This class act as an orchestrator to determine which methods of @FundRepository.java to call.
+ */
+
 package sec.financials.fund.service;
 
 
@@ -9,6 +13,7 @@ import sec.financials.fund.domain.Fund;
 import sec.financials.fund.domain.FundRepository;
 import sec.financials.fund.exception.NoFundFoundException;
 
+
 @Service
 public class FundService {
 
@@ -19,10 +24,13 @@ public class FundService {
     }
 
     public Fund fetchFundBySeries(String seriesId) {
-        return fundRepository.findBySeriesId(seriesId)
+        var fund = new Fund();
+        var fetchedFund = fundRepository.findBySeriesId(seriesId)
                 .orElseThrow(() ->
                         new NoFundFoundException("No fund found for series: " + seriesId)
                 );
+        fund.classifyStrategyRule(fetchedFund.getFundType());
+        return fetchedFund;
     }
 
     public Page<@NonNull Fund> findAll(Pageable pageable) {
