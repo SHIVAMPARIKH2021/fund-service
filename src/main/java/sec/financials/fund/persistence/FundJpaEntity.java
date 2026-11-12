@@ -1,4 +1,4 @@
-package sec.financials.fund.persistence.entity;
+package sec.financials.fund.persistence;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(name = "fund_master", schema = "analytics")
-public class FundJpaEntity {
+class FundJpaEntity {
 
     @Id
     @Column(name = "fund_id", nullable = false)

@@ -4,5 +4,5 @@ import org.springframework.stereotype.Repository;
 import sec.financials.benchmark.domain.BenchmarkRepository;
 
 @Repository
-public class BenchmarkRepositoryAdapter implements BenchmarkRepository {
+class BenchmarkRepositoryAdapter implements BenchmarkRepository {
 }

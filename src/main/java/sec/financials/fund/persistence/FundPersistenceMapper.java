@@ -1,11 +1,10 @@
 package sec.financials.fund.persistence;
 
 import sec.financials.fund.domain.Fund;
-import sec.financials.fund.persistence.entity.FundJpaEntity;
 
-public class FundPersistenceMapper {
+class FundPersistenceMapper {
 
-    public static Fund toDomain(FundJpaEntity fundEntity) {
+    static Fund toDomain(FundJpaEntity fundEntity) {
         if (fundEntity == null) {
             return null;
         }

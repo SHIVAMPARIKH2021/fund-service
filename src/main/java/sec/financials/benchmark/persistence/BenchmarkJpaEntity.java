@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(name = "benchmark_master", schema = "analytics")
-public class BenchmarkJpaEntity {
+class BenchmarkJpaEntity {
 
     @Id
     @Column(name = "benchmark_id", nullable = false)

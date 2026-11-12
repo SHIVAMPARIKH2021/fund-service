@@ -2,9 +2,9 @@ package sec.financials.benchmark.persistence;
 
 import sec.financials.benchmark.domain.Benchmark;
 
-public class BenchmarkPersistenceMapper {
+class BenchmarkPersistenceMapper {
 
-    public static Benchmark toDomain(BenchmarkJpaEntity entity) {
+    static Benchmark toDomain(BenchmarkJpaEntity entity) {
         if (entity == null) {
             return null;
         }

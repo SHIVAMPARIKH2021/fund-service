@@ -7,14 +7,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import sec.financials.fund.domain.Fund;
 import sec.financials.fund.domain.FundRepository;
-import sec.financials.fund.persistence.entity.FundJpaEntity;
 
-import java.util.List;
 import java.util.Optional;
 
 @Slf4j
 @Repository
-public class FundRepositoryAdapter implements FundRepository {
+class FundRepositoryAdapter implements FundRepository {
 
     private final FundJpaRepository fundJpaRepository;
 

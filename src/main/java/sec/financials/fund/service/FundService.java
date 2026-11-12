@@ -8,9 +8,6 @@ import org.springframework.stereotype.Service;
 import sec.financials.fund.domain.Fund;
 import sec.financials.fund.domain.FundRepository;
 import sec.financials.fund.exception.NoFundFoundException;
-import sec.financials.fund.web.FundResponseDto;
-import sec.financials.fund.web.FundWebMapper;
-import sec.financials.fund.web.PageResponseDto;
 
 @Service
 public class FundService {
