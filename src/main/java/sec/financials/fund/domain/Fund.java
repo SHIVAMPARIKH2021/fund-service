@@ -1,10 +1,11 @@
 package sec.financials.fund.domain;
 
+import ch.qos.logback.core.util.StringUtil;
 import lombok.*;
-import sec.financials.benchmark.domain.Benchmark;
+import org.springframework.context.annotation.Bean;
+import sec.financials.fund.exception.RegulatoryInvariantViolationException;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Getter
 @Setter
@@ -33,4 +34,17 @@ public class Fund {
     private Boolean hasQuarterlyHoldings;
     private Integer effectiveFromQuarter;
     private Integer effectiveFromYear;
+
+    /**
+     * A passive fund type must have a primary benchmark.
+     * A newer fund - less than one year of filing history is exempted by SEC for not to have benchmark.
+     * @param fundType - ACTIVE, PASSIVE, UNKNOWN
+     */
+    public void classifyStrategyRule(String fundType) {
+        if(fundType.equalsIgnoreCase("PASSIVE")) {
+            if(this.primaryBenchmarkId == null || StringUtil.notNullNorEmpty(this.primaryBenchmarkName)) {
+                throw new RegulatoryInvariantViolationException("Primary Benchmark Not Found");
+            }
+        }
+    }
 }
